@@ -83,23 +83,30 @@ SELECT player_name, SUM(score) FROM card_games
     GROUP BY player_name
     ORDER BY score asc;
     
---Top Players for the game Rummy.
-SELECT game_name, player_name, score,
-  CASE
-    WHEN score =525 THEN '1st Place'
-    WHEN score=523 THEN '2nd Place'
-    WHEN score=517 THEN '3rd Place'
-  END as TOP_3_Players
-FROM card_games 
-WHERE game_name='Rummy' 
-ORDER BY score DESC LIMIT 3;
+--Top Players for the game Rummy
+SELECT game_name, player_name, score FROM card_games 
+    WHERE game_name = "Rummy"
+    ORDER BY score desc limit 3; 
 
---Scores over 200 for the game Crazy Eights.
+--Scores over 200 for the game Crazy Eights 
 SELECT * FROM card_games 
     WHERE score>200 
     AND game_name='Crazy Eights'
     ORDER BY score desc;
 
---How many games each player participated in.
+--How many games each player participated in
 SELECT player_name, COUNT(*) FROM card_games 
     GROUP BY player_name;
+
+--Players above and below average scores for Rummy. 
+
+SELECT game_name, AVG (score) FROM card_games
+    WHERE game_name = "Rummy"; 
+
+SELECT game_name, player_name, score,
+    CASE
+        WHEN score > 412 THEN 'Above Average'
+        WHEN score = 412 THEN 'Average'
+        WHEN score < 412 THEN 'Below Average'
+    END as Players_Above_Or_Below_Average
+FROM card_games WHERE game_name='Rummy' GROUP BY player_name ORDER BY score;
