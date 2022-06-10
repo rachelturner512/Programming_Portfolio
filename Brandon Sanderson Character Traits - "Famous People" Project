@@ -1,0 +1,44 @@
+/* This was a Khan Academy project at the end of the "Rational Queries in SQL" module. */ 
+
+/* Brandon Sanderson character traits */
+CREATE TABLE characters (id INTEGER PRIMARY KEY, name TEXT, book_series TEXT);
+
+INSERT INTO characters VALUES (1, "Hoid", "Stormlight Archives, Warbreaker"); 
+INSERT INTO characters VALUES (2, "Adolin", "Stormlight Archives");
+INSERT INTO characters VALUES (3, "Shallan", "Stormlight Archives");
+INSERT INTO characters VALUES (4, "Dalinar", "Stormlight Archives"); 
+INSERT INTO characters VALUES (5, "Navani", "Stormlight Archives");
+INSERT INTO characters VALUES (6, "Vasher", "Stormlight Archives"); 
+INSERT INTO characters VALUES (7, "Vivenna", "Warbreaker");
+INSERT INTO characters VALUES (8, "Susebron", "Warbreaker");
+
+CREATE TABLE background (id INTEGER PRIMARY KEY, name TEXT, relationship_with TEXT, country TEXT); 
+
+INSERT INTO background VALUES (1, "Hoid", "King Elhokar", "Yolen"); 
+INSERT INTO background VALUES (2, "Adolin", "Shallan", "Alethkar");
+INSERT INTO background VALUES (3, "Shallan", "Adolin", "Jah Kaved");
+INSERT INTO background VALUES (4, "Dalinar", "Navani", "Alethkar"); 
+INSERT INTO background VALUES (5, "Navani", "Dalinar", "Roshar");
+INSERT INTO background VALUES (6, "Vasher", "", "Nalthis"); 
+INSERT INTO background VALUES (7, "Vivenna", "Susebron", "Idrian");
+INSERT INTO background VALUES (8, "Susebron", "Vivenna", "Hallandren");
+
+/* Characters and the book series that they are in */ 
+
+SELECT name, book_series FROM characters
+    GROUP BY name; 
+    
+/* Characters and who they are in a relationship with */ 
+
+SELECT characters.name a, background.name b FROM characters
+    JOIN background
+    ON characters.name = background.relationship_with; 
+
+/* Country and which books series and character is associated with it */ 
+
+SELECT background.country, characters.book_series,characters.name  FROM background
+    JOIN characters
+    ON background.name = characters.name
+    GROUP BY country; 
+    
+    
