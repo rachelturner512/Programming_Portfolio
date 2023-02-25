@@ -39,6 +39,6 @@ SELECT characters.name a, background.name b FROM characters
 SELECT background.country, characters.book_series,characters.name  FROM background
     JOIN characters
     ON background.name = characters.name
-    GROUP BY country; 
+    GROUP BY country;
     
     
