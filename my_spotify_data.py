@@ -1,3 +1,5 @@
+# I requested my data from Spotify so that I can analyze and visualize it with Python and Tableau. 
+
 import pandas as pd
 import numpy as np
 import requests
